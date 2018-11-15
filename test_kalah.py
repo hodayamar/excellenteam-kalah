@@ -17,5 +17,8 @@ class KalahTestCase(unittest.TestCase):
         self.assertRaises(ValueError, self.game.play, 7)
         self.assertRaises(ValueError, self.game.play, self.game.holes)
 
+    def test_init_done(self):
+        assert self.game.game_over == False
+
 if __name__ == '__main__':
     unittest.main()

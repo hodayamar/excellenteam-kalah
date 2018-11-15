@@ -31,6 +31,10 @@ class Kalah(object):
             self.current_player = not self.current_player
             return f"Player {self.current_player + 1} plays next"
 
+    def done(self):
+
+        return self.game_over
+
 # game = Kalah(6,4)
 
 
