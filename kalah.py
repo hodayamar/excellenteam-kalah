@@ -21,7 +21,7 @@ class Kalah(object):
             raise  ValueError("This hole does not have seeds")
 
         if self.game_over:
-            bank = self.holes + 1
+            bank = self.holes
             if self.board[0][bank] == self.board[0][bank]:
                 return "tie"
             else:
@@ -34,6 +34,11 @@ class Kalah(object):
     def done(self):
 
         return self.game_over
+
+    def score(self):
+
+        bank = self.holes
+        return (self.board[0][bank]),(self.board[0][bank])
 
 # game = Kalah(6,4)
 

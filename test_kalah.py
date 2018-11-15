@@ -20,5 +20,8 @@ class KalahTestCase(unittest.TestCase):
     def test_init_done(self):
         assert self.game.game_over == False
 
+    def test_init_score(self):
+        assert self.game.score() == (0,0)
+
 if __name__ == '__main__':
     unittest.main()
