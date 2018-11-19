@@ -95,5 +95,7 @@ class Kalah(object):
 # game.play(3)
 # print("****************")
 # game.play(4)
+# game.play(0)
+# print(game.status())
 
 

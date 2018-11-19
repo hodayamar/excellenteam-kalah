@@ -38,7 +38,10 @@ class KalahTestCase(unittest.TestCase):
         self.game.play(4)
         assert self.game.status() == (5, 5, 0, 0, 6, 6, 2, 5, 5, 4, 4, 0, 5, 1)
 
-        self.assertRaises(ValueError, self.game.play, 3)
+        self.game.play(0)
+        assert self.game.status() == (0, 6, 1, 1, 7, 7, 2, 5, 5, 4, 4, 0, 5, 1)
+
+        self.assertRaises(ValueError, self.game.play, 4)
 
 
 if __name__ == '__main__':
