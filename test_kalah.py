@@ -23,9 +23,23 @@ class KalahTestCase(unittest.TestCase):
     def test_init_score(self):
         assert self.game.score() == (0,0)
 
-    # def test_simple_nove(self):
-    #     self.game.play(2)
-    #     assert self.game.status() == (4, 0, 5, 5, 5, 5, 0, 4, 4, 4, 4, 4, 4, 0)
+    def test_simple_move(self):
+        self.game.play(2)
+        assert self.game.status() == (4,4,0,5,5,5,1,4,4,4,4,4,4,0)
+
+    def test_few_moves(self):
+
+        self.game.play(2)
+        assert self.game.status() == (4, 4, 0, 5, 5, 5, 1, 4, 4, 4, 4, 4, 4, 0)
+
+        self.game.play(3)
+        assert self.game.status() == (5, 4, 0, 5, 5, 5, 1, 4, 4, 4, 0, 5, 5, 1)
+
+        self.game.play(4)
+        assert self.game.status() == (5, 4, 0, 5, 0, 6, 2, 5, 5, 5, 0, 5, 5, 1)
+
+        self.assertRaises(ValueError, self.game.play, 3)
+
 
 if __name__ == '__main__':
     unittest.main()
