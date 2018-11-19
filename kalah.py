@@ -54,13 +54,11 @@ class Kalah(object):
 
         left_seeds = sum_of_seeds
         for i in range(0,sum_of_seeds):
-            if left_seeds:
                 print(f"left_seeds {left_seeds}")
                 index = self.current_idex(i, hole)
                 if not self.current_player and index == self.holes:
                     self.add_seeds( 1, left_seeds, 0)
                     left_seeds -= 1
-
 
                 elif self.current_player and index == 0:
                     self.add_seeds(1, left_seeds, 1)
@@ -69,15 +67,6 @@ class Kalah(object):
                 if left_seeds:
                     self.add_seeds(0,left_seeds,index)
                     left_seeds -= 1
-
-            else:
-                break
-
-        print("self.board ")
-        print(self.board)
-
-        print("self.bank ")
-        print(self.bank)
 
         self.if_win()
         # TODO return a massege of win
