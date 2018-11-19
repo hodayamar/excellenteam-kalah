@@ -53,11 +53,13 @@ class Kalah(object):
         self.board[hole + self.current_player * self.holes] = 0
 
         left_seeds = sum_of_seeds
+
+        index = 0
         for i in range(0,sum_of_seeds):
                 print(f"left_seeds {left_seeds}")
                 index = self.current_idex(i, hole)
                 if not self.current_player and index == self.holes:
-                    self.add_seeds( 1, left_seeds, 0)
+                    self.add_seeds(1, left_seeds, 0)
                     left_seeds -= 1
 
                 elif self.current_player and index == 0:
@@ -70,9 +72,11 @@ class Kalah(object):
 
         self.if_win()
         # TODO return a massege of win
-        self.current_player = not self.current_player
-        print(f"Player {self.current_player + 1} plays next")
-        return f"Player {self.current_player + 1} plays next"
+        print (f"final index is: {index}")
+        if index != self.holes and index != 0:
+            self.current_player = not self.current_player
+
+        return  f"Player {self.current_player + 1} plays next"
 
 
 

@@ -33,10 +33,10 @@ class KalahTestCase(unittest.TestCase):
         assert self.game.status() == (4, 4, 0, 5, 5, 5, 1, 4, 4, 4, 4, 4, 4, 0)
 
         self.game.play(3)
-        assert self.game.status() == (5, 4, 0, 5, 5, 5, 1, 4, 4, 4, 0, 5, 5, 1)
+        assert self.game.status() == (4, 4, 0, 0, 6, 6, 2, 5, 5, 4, 4, 4, 4, 0)
 
         self.game.play(4)
-        assert self.game.status() == (5, 4, 0, 5, 0, 6, 2, 5, 5, 5, 0, 5, 5, 1)
+        assert self.game.status() == (5, 5, 0, 0, 6, 6, 2, 5, 5, 4, 4, 0, 5, 1)
 
         self.assertRaises(ValueError, self.game.play, 3)
 
