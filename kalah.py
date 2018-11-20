@@ -3,7 +3,7 @@ class Kalah(object):
     def __init__(self, holes, seeds):
 
         self.board = [seeds] * holes * 2
-        self.bank = [0,0]
+        self.bank = [0] * 2
         self.holes = holes
         self.game_over = False
         self.current_player = 0
@@ -22,6 +22,7 @@ class Kalah(object):
 
         self.bank = l_bank
 
+
     def valid_hole(self,hole):
 
         if hole not in range(0, self.holes):
@@ -31,14 +32,12 @@ class Kalah(object):
                  self.current_player and self.board[hole + self.holes] == 0:
             raise ValueError("This hole does not have seeds")
 
-    def if_win(self):
+    def win(self):
 
-        if self.game_over:
-            if self.bank[0] == self.bank[1]:
-                return "tie"
-
-            massege = "Player 1 wins" if self.bank[1] > self.bank[0] else "Player 2 wins"
-            return massege
+        if self.bank[0] == self.bank[1]:
+            return "Tie"
+        msg = "Player 2 wins" if self.bank[1] > self.bank[0] else "Player 1 wins"
+        return msg
 
 
     def current_idex(self,i,hole):
@@ -48,6 +47,7 @@ class Kalah(object):
 
         if left_seeds:
             if bank:
+
                 self.bank[index] += 1
             else:
                 self.board[index] += 1
@@ -75,20 +75,34 @@ class Kalah(object):
             self.add_seeds(0, left_seeds, index)
             left_seeds -= 1
 
-        self.if_win()
-        # TODO return a massege of win
-
         last_index = index + left_seeds
         opposite_index = self.holes * 2 -1 - last_index
         if self.board[last_index] == 1 and self.board[opposite_index] != 0:
-
             robbery = self.board[opposite_index] + self.board[last_index]
             self.board[opposite_index] = 0
             self.board[last_index] = 0
             self.bank[self.current_player] += robbery
 
+
         if index != self.holes and index != 0:
             self.current_player = not self.current_player
+
+
+        f_index = (self.current_player) * self.holes
+        s_index = self.holes * ((self.current_player) + 1) -1
+
+        # print(f"first loc: {f_index}")
+        # print(f"second loc: {s_index}")
+
+        if sum(self.board[f_index : s_index +1]) == 0:
+
+            self.bank[self.current_player] += sum(self.board)
+            self.game_over = True
+
+        if self.game_over:
+            win = self.win()
+            return win
+
 
         return  f"Player {self.current_player + 1} plays next"
 
@@ -99,6 +113,11 @@ class Kalah(object):
     def score(self):
         return (self.bank[0],self.bank[1])
 
-
-
-
+# game = Kalah(6,4)
+#
+# game.set_status([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+# game.set_bank([0,0])
+# print(game.status())
+#
+# game.play(2)
+# print(game.status())

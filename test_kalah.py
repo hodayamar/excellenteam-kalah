@@ -62,6 +62,24 @@ class KalahTestCase(unittest.TestCase):
         assert self.game.status() == (0, 1, 4, 5, 4, 5, 0, 7, 7, 6, 6, 0, 3, 0)
 
 
+    def test_f_play_win(self):
+
+        self.game.set_status([0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1])
+        self.game.set_bank([5,1])
+        assert self.game.play(5) == "Player 1 wins"
+
+    def test_s_play_win(self):
+
+        self.game.set_status([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
+        self.game.set_bank([0,0])
+        self.game.play(1)
+        assert self.game.play(5) == "Player 2 wins"
+
+    def test_tie(self):
+        self.game.set_status([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
+        self.game.set_bank([2, 0])
+        self.game.play(1)
+        assert self.game.play(5) == "Tie"
 
 if __name__ == '__main__':
     unittest.main()
