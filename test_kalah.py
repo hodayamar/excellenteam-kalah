@@ -52,7 +52,11 @@ class KalahTestCase(unittest.TestCase):
         self.game.play(5)
         assert self.game.status() == (1, 0, 4, 4, 4, 0, 7, 6, 6, 6, 5, 0, 5, 0)
 
+        self.game.set_status([4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 8])
+        self.game.play(5)
+        assert self.game.status() == (5, 5, 5, 5, 5, 0, 7, 0, 4, 4, 4, 4, 0, 7)
 
+    # def test_captures_second_player(self):
 
 
 

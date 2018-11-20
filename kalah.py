@@ -108,6 +108,9 @@ game.play(5)
 
 print(game.status())
 game.status()
+
+game.set_status([0, 0, 4, 4, 4, 4, 0, 5, 5, 4, 4, 8])
+
 # print("****************")
 #
 # game.play(3)
