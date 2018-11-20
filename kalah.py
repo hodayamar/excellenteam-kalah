@@ -100,35 +100,5 @@ class Kalah(object):
         return (self.bank[0],self.bank[1])
 
 
-game = Kalah(6,4)
-# print("***************")
-#
-game.set_status([0,0,4,4,4,9,5,5,5,4,4,4])
-#
-# #
-print(game.status())
-print("//////////////////////")
-game.play(5)
-
-print(game.status())
-game.status()
-
-game.set_status([0, 0, 4, 4, 4, 4, 0, 5, 5, 4, 4, 8])
-
-# print("****************")
-#
-# game.play(3)
-# print("****************")
-# game.play(4)
-# print("****************")
-# game.play(4)
-# print("****************")
-#
-# game.play(0)
-# print("****************")
-#
-# game.play(1)
-
-# print(game.status())
 
 
