@@ -14,9 +14,13 @@ class Kalah(object):
         return tuple(self.board[0 : self.holes] + [self.bank[0]] +\
                      self.board[self.holes : (self.holes * 2) + 1] + [self.bank[1]])
 
-    def set_status(self, l):
+    def set_status(self, l_board):
 
-        self.board = l
+        self.board = l_board
+
+    def set_bank(self, l_bank):
+
+        self.bank = l_bank
 
     def valid_hole(self,hole):
 
@@ -75,11 +79,11 @@ class Kalah(object):
         # TODO return a massege of win
 
         last_index = index + left_seeds
+        opposite_index = self.holes * 2 -1 - last_index
+        if self.board[last_index] == 1 and self.board[opposite_index] != 0:
 
-        if self.board[last_index] == 1:
-
-            robbery = self.board[self.holes * 2 -1 - last_index] + self.board[last_index]
-            self.board[self.holes * 2 - 1 - last_index] = 0
+            robbery = self.board[opposite_index] + self.board[last_index]
+            self.board[opposite_index] = 0
             self.board[last_index] = 0
             self.bank[self.current_player] += robbery
 
