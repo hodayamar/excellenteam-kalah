@@ -117,3 +117,45 @@ class Kalah(object):
 
     def __repr__(self):
         return f"Kalah({self.seeds}, {self.holes}, status={self.status()}, player={self.current_player})"
+
+    def render(self):
+
+        str_status = self.status()
+        board = "-------" * (self.holes + 4) + "\n"
+        board += " *****   " * (self.holes + 2) + "\n" + " *   *   "
+
+        i = self.holes * 2 - 1
+        while i >= self.holes:
+            board += f" * {str_status[i + 1]} *   "
+            i -= 1
+        board += f" *   *   "
+
+        board += "\n" + f" *   *   "  + f" *****   " * (self.holes) + " *   * \
+          \n" + f" * {self.bank[1]} *" + " " * 58 + f"* {self.bank[0]} *\n *   *   "
+
+        board += " *****   " * (self.holes) +" *   *\n *   *   "
+
+
+        for i in range(0, self.holes):
+
+
+            board += f" * {str_status[i]} *   "
+        board += f" *   *   \n"  + f" *****   " * (self.holes + 2)
+
+        board += "\n" +"-------" * (self.holes + 4) + "\n"
+
+        return board
+
+    def __str__(self):
+        return self.render()
+
+
+
+
+game = Kalah(6,4)
+game.play(0)
+print(game)
+game.play(0)
+print(game)
+game.play(4)
+print(game)
