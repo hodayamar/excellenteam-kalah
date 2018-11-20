@@ -77,11 +77,11 @@ class Kalah(object):
             left_seeds -= 1
 
         last_index = index + left_seeds
-        opposite_index = self.holes * 2 - 1 - last_index
+        oposite_index = self.holes * 2 - 1 - last_index
 
-        if self.board[last_index] == 1 and self.board[opposite_index] != 0:
-            robbery = self.board[opposite_index] + self.board[last_index]
-            self.board[opposite_index] = 0
+        if self.board[last_index] == 1 and self.board[oposite_index] != 0:
+            robbery = self.board[oposite_index] + self.board[last_index]
+            self.board[oposite_index] = 0
             self.board[last_index] = 0
             self.bank[self.current_player] += robbery
 
