@@ -51,6 +51,7 @@ class Kalah(object):
 
     def play(self, hole):
 
+        bonus_game = True
         self.if_valid_hole(hole)
 
         hole_for_playing = hole + self.current_player * self.holes
@@ -66,10 +67,14 @@ class Kalah(object):
             index = self.current_index(i, hole)
 
             if not self.current_player and index == self.holes:
+                if left_seeds == 2:
+                    bonus_game = False
                 self.add_seeds(1, left_seeds, 0)
                 left_seeds -= 1
 
             elif self.current_player and index == 0:
+                if left_seeds == 2:
+                    bonus_game = False
                 self.add_seeds(1, left_seeds, 1)
                 left_seeds -= 1
 
@@ -85,7 +90,7 @@ class Kalah(object):
             self.board[last_index] = 0
             self.bank[self.current_player] += robbery
 
-        if index != self.holes and index != 0:
+        if index != self.holes and index != 0 and bonus_game:
             self.current_player = not self.current_player
 
         f_index = (self.current_player) * self.holes
