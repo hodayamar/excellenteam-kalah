@@ -81,5 +81,9 @@ class KalahTestCase(unittest.TestCase):
         self.game.play(1)
         assert self.game.play(5) == "Tie"
 
+    def test_repr(self):
+        print(repr(Kalah(6,4)))
+        assert repr(Kalah(6,4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"
+
 if __name__ == '__main__':
     unittest.main()

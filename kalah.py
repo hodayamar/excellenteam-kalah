@@ -7,6 +7,7 @@ class Kalah(object):
         self.holes = holes
         self.game_over = False
         self.current_player = 0
+        self.seeds = seeds
 
     def status(self):
 
@@ -113,3 +114,6 @@ class Kalah(object):
     def score(self):
 
         return (self.bank[0], self.bank[1])
+
+    def __repr__(self):
+        return f"Kalah({self.seeds}, {self.holes}, status={self.status()}, player={self.current_player})"
