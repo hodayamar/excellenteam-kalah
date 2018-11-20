@@ -121,6 +121,7 @@ class Kalah(object):
     def render(self):
 
         str_status = self.status()
+
         board = "-------" * (self.holes + 4) + "\n"
         board += " *****   " * (self.holes + 2) + "\n" + " *   *   "
 
@@ -130,19 +131,16 @@ class Kalah(object):
             i -= 1
         board += f" *   *   "
 
-        board += "\n" + f" *   *   "  + f" *****   " * (self.holes) + " *   * \
+        board += "\n" + f" *   *   " + f" *****   " * (self.holes) + " *   * \
           \n" + f" * {self.bank[1]} *" + " " * 58 + f"* {self.bank[0]} *\n *   *   "
 
-        board += " *****   " * (self.holes) +" *   *\n *   *   "
-
+        board += " *****   " * self.holes + " *   *\n *   *   "
 
         for i in range(0, self.holes):
-
-
             board += f" * {str_status[i]} *   "
-        board += f" *   *   \n"  + f" *****   " * (self.holes + 2)
+        board += f" *   *   \n" + f" *****   " * (self.holes + 2)
 
-        board += "\n" +"-------" * (self.holes + 4) + "\n"
+        board += "\n" + "-------" * (self.holes + 4) + "\n"
 
         return board
 
@@ -150,9 +148,7 @@ class Kalah(object):
         return self.render()
 
 
-
-
-game = Kalah(6,4)
+game = Kalah(6, 4)
 game.play(0)
 print(game)
 game.play(0)
