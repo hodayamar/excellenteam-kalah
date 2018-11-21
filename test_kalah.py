@@ -80,6 +80,7 @@ class KalahTestCase(unittest.TestCase):
         self.game.set_bank([2, 0])
         self.game.play(1)
         assert self.game.play(5) == "Tie"
+        print(self.game)
 
     def test_repr(self):
         assert repr(Kalah(6,4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"

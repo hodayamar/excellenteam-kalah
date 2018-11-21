@@ -132,7 +132,7 @@ class Kalah(object):
         board += f" *   *   "
 
         board += "\n" + f" *   *   " + f" *****   " * (self.holes) + " *   * \
-          \n" + f" * {self.bank[1]} *" + " " * 58 + f"* {self.bank[0]} *\n *   *   "
+          \n" + f" * {self.bank[1]} *    " + " " * len("*****") * self.holes + "    " * self.holes + f"* {self.bank[0]} *\n *   *   "
 
         board += " *****   " * self.holes + " *   *\n *   *   "
 
@@ -151,7 +151,7 @@ class Kalah(object):
 game = Kalah(6, 4)
 game.play(0)
 print(game)
-game.play(0)
+game.play(1)
 print(game)
 game.play(4)
 print(game)
