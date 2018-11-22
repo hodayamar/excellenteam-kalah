@@ -50,55 +50,74 @@ class Kalah(object):
             else:
                 self.board[index] += 1
 
-    def play(self, hole):
+    def in_right_range(self, last_index):
+        return 0 <= last_index <= self.holes if not self.current_player \
+            else self.holes < last_index <= self.holes * 2
 
-        bonus_game = True
+    def play(self, hole):
+        last_index = 0
         self.if_valid_hole(hole)
+        rob = True
+        bonus_game = False
 
         hole_for_playing = hole + self.current_player * self.holes
 
         sum_of_seeds = self.board[hole_for_playing]
         self.board[hole_for_playing] = 0
 
-        index = 0
         left_seeds = sum_of_seeds
 
         for i in range(0, sum_of_seeds):
 
             index = self.current_index(i, hole)
+            if left_seeds == 1:
+                last_index = index
 
             if not self.current_player and index == self.holes:
-                if left_seeds == 2:
-                    bonus_game = False
+                if left_seeds == 1:
+
+                    rob = False
+                    bonus_game = True
+
                 self.add_seeds(1, left_seeds, 0)
-                left_seeds -= 1
+                if left_seeds:
+                    left_seeds -= 1
 
             elif self.current_player and index == 0:
-                if left_seeds == 2:
-                    bonus_game = False
+                if left_seeds == 1:
+                    rob = False
+                    bonus_game = True
+
                 self.add_seeds(1, left_seeds, 1)
-                left_seeds -= 1
+                if left_seeds:
+                    left_seeds -= 1
 
             self.add_seeds(0, left_seeds, index)
-            left_seeds -= 1
+            if left_seeds:
+                left_seeds -= 1
 
-        last_index = index + left_seeds
         oposite_index = self.holes * 2 - 1 - last_index
 
-        if self.board[last_index] == 1 and self.board[oposite_index] != 0:
+        in_range = self.in_right_range(last_index)
+
+        if self.board[last_index] == 1 and self.board[oposite_index] != 0 and rob and in_range:
             robbery = self.board[oposite_index] + self.board[last_index]
             self.board[oposite_index] = 0
             self.board[last_index] = 0
             self.bank[self.current_player] += robbery
+            print("here")
 
-        if index != self.holes and index != 0 and bonus_game:
+        if not bonus_game:
+
             self.current_player = not self.current_player
+
 
         f_index = (self.current_player) * self.holes
         s_index = self.holes * ((self.current_player) + 1) - 1
 
         if sum(self.board[f_index: s_index + 1]) == 0:
             self.bank[self.current_player] += sum(self.board)
+            self.board = [0] * self.holes * 2
             self.game_over = True
 
         if self.game_over:
@@ -148,10 +167,53 @@ class Kalah(object):
         return self.render()
 
 
-game = Kalah(6, 4)
-game.play(0)
-print(game)
-game.play(1)
-print(game)
-game.play(4)
-print(game)
+# game = Kalah(6, 4)
+# game.play(0)
+# game.play(0)
+# game.play(2)#no change player
+# game.play(1)
+#
+# game.play(2)
+# game.play(0)
+# game.play(3)
+# game.play(0)
+# game.play(4)
+# game.play(1)
+# print(game.play(0))
+# print(game.status())
+# print("\n\n\n\n**************************************")
+# game.play(5)
+# game.play(4)
+# game.play(1)
+# game.play(3)
+# game.play(2)
+# game.play(5)
+# game.play(0)
+# game.play(3)
+# game.play(2)
+# game.play(5)
+# game.play(0)
+# game.play(5)
+# game.play(4)
+# game.play(5)
+# game.play(3)
+# game.play(1)
+# game.play(3)
+# game.play(4)
+# game.play(2)
+# game.play(4)
+# game.play(4)
+# game.play(5)
+# game.play(0)
+# game.play(3)
+# game.play(4)
+# game.play(2)
+# game.play(3)
+# game.play(4)
+# game.play(5)
+# game.play(4)
+# print(game.play(3))
+# print(game.status())
+
+
+# print(game.__repr__())
