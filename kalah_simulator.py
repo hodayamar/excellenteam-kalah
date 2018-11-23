@@ -19,18 +19,19 @@ def simulate_game(holes, seeds, steps):
 
     game = Kalah(holes,seeds)
 
-    for i in range(0, len(steps)):
+    for i in range(0, len(steps[:41])):
         if steps[i] > holes - 1:
             steps[i] -= holes
-        game.play(steps[i])
-    print(game.status())
+        print(game.play(steps[i]))
+
+    assert((0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 34) == game.status())
 
 def render_game(holes, seeds, steps):
     pass
 
 
 if __name__ == "__main__":
-    with open(f"data/game_2.txt") as f:
+    with open(f"data/game_3.txt") as f:
         lines = f.read().splitlines()
 
     steps = parse_game(lines)

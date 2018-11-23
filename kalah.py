@@ -51,8 +51,8 @@ class Kalah(object):
                 self.board[index] += 1
 
     def in_right_range(self, last_index):
-        return 0 <= last_index <= self.holes if not self.current_player \
-            else self.holes < last_index <= self.holes * 2
+        return 0 <= last_index < self.holes if not self.current_player \
+            else self.holes <= last_index < self.holes * 2
 
     def play(self, hole):
         last_index = 0
@@ -105,7 +105,7 @@ class Kalah(object):
             self.board[oposite_index] = 0
             self.board[last_index] = 0
             self.bank[self.current_player] += robbery
-            print("here")
+            bonus_game = False
 
         if not bonus_game:
 
@@ -116,7 +116,7 @@ class Kalah(object):
         s_index = self.holes * ((self.current_player) + 1) - 1
 
         if sum(self.board[f_index: s_index + 1]) == 0:
-            self.bank[self.current_player] += sum(self.board)
+            self.bank[not self.current_player] += sum(self.board)
             self.board = [0] * self.holes * 2
             self.game_over = True
 
@@ -167,53 +167,3 @@ class Kalah(object):
         return self.render()
 
 
-# game = Kalah(6, 4)
-# game.play(0)
-# game.play(0)
-# game.play(2)#no change player
-# game.play(1)
-#
-# game.play(2)
-# game.play(0)
-# game.play(3)
-# game.play(0)
-# game.play(4)
-# game.play(1)
-# print(game.play(0))
-# print(game.status())
-# print("\n\n\n\n**************************************")
-# game.play(5)
-# game.play(4)
-# game.play(1)
-# game.play(3)
-# game.play(2)
-# game.play(5)
-# game.play(0)
-# game.play(3)
-# game.play(2)
-# game.play(5)
-# game.play(0)
-# game.play(5)
-# game.play(4)
-# game.play(5)
-# game.play(3)
-# game.play(1)
-# game.play(3)
-# game.play(4)
-# game.play(2)
-# game.play(4)
-# game.play(4)
-# game.play(5)
-# game.play(0)
-# game.play(3)
-# game.play(4)
-# game.play(2)
-# game.play(3)
-# game.play(4)
-# game.play(5)
-# game.play(4)
-# print(game.play(3))
-# print(game.status())
-
-
-# print(game.__repr__())
