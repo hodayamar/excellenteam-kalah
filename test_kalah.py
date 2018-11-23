@@ -50,7 +50,6 @@ class KalahTestCase(unittest.TestCase):
 
         self.game.set_board([0, 0, 4, 4, 4, 9, 5, 5, 5, 4, 4, 4])
         self.game.play(5)
-        print(self.game.status())
         assert self.game.status() == (1, 0, 4, 4, 4, 0, 7, 6, 6, 6, 5, 0, 5, 0)
 
         self.game.set_board([4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 8])
@@ -72,16 +71,15 @@ class KalahTestCase(unittest.TestCase):
     def test_s_play_win(self):
 
         self.game.set_board([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
-        self.game.set_bank([0,0])
+        self.game.set_bank([0,1])
         self.game.play(1)
         assert self.game.play(5) == "Player 2 wins"
 
     def test_tie(self):
         self.game.set_board([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
-        self.game.set_bank([2, 0])
+        self.game.set_bank([0, 0])
         self.game.play(1)
         assert self.game.play(5) == "Tie"
-        print(self.game)
 
     def test_repr(self):
         assert repr(Kalah(6,4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"

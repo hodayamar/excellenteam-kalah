@@ -1,5 +1,5 @@
 from kalah import Kalah
-import itertools
+
 
 def parse_game(lines):
 
@@ -15,25 +15,25 @@ def parse_game(lines):
         all_games[i] = index.index(all_games[i])
     return all_games
 
-def simulate_game(holes, seeds, steps):
 
+def simulate_game(holes, seeds, steps):
     game = Kalah(holes,seeds)
 
-    for i in range(0, len(steps[:41])):
+    for i in range(0, len(steps)):
+        if steps[i] > holes - 1:
+            steps[i] -= holes
+        msg = game.play(steps[i])
+    status = game.status()
+    l = {msg: status}
+    return l
+
+def render_game(holes, seeds, steps):
+    game = Kalah(holes, seeds)
+
+    for i in range(0, len(steps)):
         if steps[i] > holes - 1:
             steps[i] -= holes
         print(game.play(steps[i]))
-
-    assert((0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 34) == game.status())
-
-def render_game(holes, seeds, steps):
-    pass
+        print(game)
 
 
-if __name__ == "__main__":
-    with open(f"data/game_3.txt") as f:
-        lines = f.read().splitlines()
-
-    steps = parse_game(lines)
-    simulate_game(6, 6, steps)
-    # print(render_game(6, 6, steps))

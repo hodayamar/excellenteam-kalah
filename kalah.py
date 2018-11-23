@@ -55,6 +55,7 @@ class Kalah(object):
             else self.holes <= last_index < self.holes * 2
 
     def play(self, hole):
+
         last_index = 0
         self.if_valid_hole(hole)
         rob = True
@@ -97,7 +98,6 @@ class Kalah(object):
                 left_seeds -= 1
 
         oposite_index = self.holes * 2 - 1 - last_index
-
         in_range = self.in_right_range(last_index)
 
         if self.board[last_index] == 1 and self.board[oposite_index] != 0 and rob and in_range:
@@ -108,9 +108,7 @@ class Kalah(object):
             bonus_game = False
 
         if not bonus_game:
-
             self.current_player = not self.current_player
-
 
         f_index = (self.current_player) * self.holes
         s_index = self.holes * ((self.current_player) + 1) - 1
@@ -139,29 +137,41 @@ class Kalah(object):
 
     def render(self):
 
-        str_status = self.status()
+        space_width = len(str(self.seeds * self.holes * 2))
+        board = ""
+        # board = "._.\n| |\n| |\n._.\n"
+        # board = u'\u256D\u2500\u2500\u256E\n\u2502' + f'{self.banks[self.current_player]}'
+        top_border = u'\u256D' + u'\u2500' * space_width + u'\u256E'
+        bottom_border = u'\u2570' + u'\u2500' * space_width + u'\u256F'
+        one_width = u'\u2502' + u' ' * space_width + u'\u2502'
+        side_border = u'\u2502'
+        board += top_border * (self.holes + 2)
+        board += "\n"
+        board += one_width
+        boxes_row = ""
+        for x in range(self.holes):
+            boxes_row += side_border + str(self.board[x]).zfill(space_width) + side_border
+        board += boxes_row
+        board += side_border + str(self.bank[0]).zfill(space_width) + side_border
+        board += "\n"
+        board += one_width + bottom_border * (self.holes) + one_width
+        board += "\n"
 
-        board = "-------" * (self.holes + 4) + "\n"
-        board += " *****   " * (self.holes + 2) + "\n" + " *   *   "
-
-        i = self.holes * 2 - 1
-        while i >= self.holes:
-            board += f" * {str_status[i + 1]} *   "
-            i -= 1
-        board += f" *   *   "
-
-        board += "\n" + f" *   *   " + f" *****   " * (self.holes) + " *   * \
-          \n" + f" * {self.bank[1]} *    " + " " * len("*****") * self.holes + "    " * self.holes + f"* {self.bank[0]} *\n *   *   "
-
-        board += " *****   " * self.holes + " *   *\n *   *   "
-
-        for i in range(0, self.holes):
-            board += f" * {str_status[i]} *   "
-        board += f" *   *   \n" + f" *****   " * (self.holes + 2)
-
-        board += "\n" + "-------" * (self.holes + 4) + "\n"
+        board += one_width + top_border * self.holes + one_width
+        board += "\n"
+        board += side_border + str(self.bank[1]).zfill(space_width) + side_border
+        boxes_row = ""
+        for x in range(self.holes, self.holes * 2):
+            boxes_row += side_border + str(self.board[x]).zfill(space_width) + side_border
+        board += boxes_row
+        board += one_width
+        board += "\n"
+        board += bottom_border * (self.holes + 2)
 
         return board
+
+
+
 
     def __str__(self):
         return self.render()
