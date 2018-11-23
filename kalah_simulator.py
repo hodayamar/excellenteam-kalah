@@ -37,3 +37,10 @@ def render_game(holes, seeds, steps):
         print(game)
 
 
+if __name__ == "__main__":
+    with open(f"data/game_2.txt") as f:
+        lines = f.read().splitlines()
+
+    steps = parse_game(lines)
+    # simulate_game(6, 6, steps)
+    print(render_game(6, 6, steps))
